@@ -3,24 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raphael Filippo | Digital Experience</title>
+    <title>Raphael Filippo | Digital Architect</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Plus+Jakarta+Sans:wght@300;500;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;500;700;800&display=swap" rel="stylesheet">
 
     <style>
+        /* --- VARIÁVEIS E RESET --- */
         :root {
             --bg: #000000;
             --accent: #ffffff;
-            --text-muted: #888888;
+            --text-muted: #999999;
+            --blue-spot: rgba(0, 80, 255, 0.15); /* Azul Subtil */
             --font-main: 'Plus Jakarta Sans', sans-serif;
-            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            --font-secondary: 'Inter', sans-serif;
+            --transition-premium: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none; /* Ativando cursor customizado premium */
+            cursor: none; /* Cursor Customizado */
         }
 
         body {
@@ -29,13 +32,51 @@
             font-family: var(--font-main);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            position: relative;
+        }
+
+        /* --- FONDO ANIMADO COM MANCHAS AZUIS (ORGÂNICO) --- */
+        .bg-spots {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            filter: blur(80px); /* Suaviza as manchas */
+        }
+
+        .spot {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--blue-spot);
+            animation: moveSpots 25s infinite alternate ease-in-out;
+            opacity: 0.6;
+        }
+
+        /* Definição das Manchas (Tamanhos e Posições) */
+        .spot-1 { width: 40vw; height: 40vw; top: -10vh; left: -10vw; animation-delay: 0s; }
+        .spot-2 { width: 35vw; height: 35vw; bottom: -15vh; right: -5vw; animation-delay: -5s; background: rgba(0, 120, 255, 0.12); }
+        .spot-3 { width: 25vw; height: 25vw; top: 30vh; right: 20vw; animation-delay: -10s; background: rgba(0, 50, 200, 0.1); }
+
+        @keyframes moveSpots {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(5vw, 5vh) scale(1.05); }
+            100% { transform: translate(-3vw, 10vh) scale(0.95); }
+        }
+
+        /* Efeito de Brilho no Mouse (Opcional, mas premium) */
+        .bg-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.03) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
         }
 
         /* --- CURSOR CUSTOM --- */
         #cursor {
             position: fixed;
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             background: #fff;
             border-radius: 50%;
             pointer-events: none;
@@ -46,79 +87,85 @@
 
         #cursor-follower {
             position: fixed;
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(255,255,255,0.3);
+            width: 35px;
+            height: 35px;
+            border: 1px solid rgba(255,255,255,0.2);
             border-radius: 50%;
             pointer-events: none;
             z-index: 9998;
-            transition: transform 0.1s ease-out;
-        }
-
-        /* --- BACKGROUND GRADIENT --- */
-        .bg-glow {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at var(--x) var(--y), rgba(255,255,255,0.05) 0%, transparent 40%);
-            z-index: -1;
-            pointer-events: none;
+            transition: transform 0.15s ease-out, background 0.3s ease;
         }
 
         /* --- LAYOUT --- */
         .container {
-            max-width: 1400px;
+            max-width: 1300px;
             margin: 0 auto;
             padding: 0 40px;
         }
 
         section {
-            padding: 120px 0;
+            padding: 100px 0;
         }
 
-        /* --- HERO --- */
+        /* --- HERO (NOME DIMINUÍDO E REFINADO) --- */
         .hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: flex-start; /* Alinhado à esquerda como Najm */
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 10vw, 8rem);
-            font-weight: 800;
-            line-height: 0.9;
-            letter-spacing: -0.04em;
-            margin-bottom: 40px;
+            font-size: clamp(1.5rem, 4vw, 2.5rem); /* NOME MUITO MENOR E REFINADO */
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 25px;
+            color: #fff;
+        }
+
+        .hero h1 strong {
+            font-weight: 700;
+        }
+
+        .hero h1 span {
+            color: var(--text-muted);
+            font-size: 0.9em;
         }
 
         .hero .subtitle {
-            font-size: clamp(1rem, 2vw, 1.5rem);
-            color: var(--text-muted);
-            max-width: 600px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 300;
+            font-size: clamp(1.8rem, 5vw, 3.5rem); /* FRASE DE IMPACTO MAIOR QUE O NOME */
+            color: #fff;
+            max-width: 900px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            font-family: var(--font-main);
         }
 
-        /* --- ABOUT (NAJM STYLE) --- */
+        /* --- ABOUT --- */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 100px;
-            border-top: 1px solid #222;
+            gap: 80px;
+            border-top: 1px solid #1a1a1a;
             padding-top: 60px;
         }
 
         .about-title {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.2em;
             color: var(--text-muted);
+            font-family: var(--font-secondary);
         }
 
         .about-content {
-            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-            line-height: 1.4;
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            line-height: 1.5;
             font-weight: 400;
+            color: #ccc;
         }
 
         .about-content strong {
@@ -126,98 +173,111 @@
         }
 
         .highlight-ia {
-            margin-top: 40px;
-            font-size: 1rem;
-            color: var(--text-muted);
-            padding: 20px;
-            border: 1px solid #222;
-            border-radius: 12px;
+            margin-top: 30px;
+            font-size: 0.95rem;
+            color: var(--accent);
+            padding: 18px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
             display: inline-block;
+            font-family: var(--font-secondary);
         }
 
         /* --- PROJECTS GRID --- */
         .project-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 30px;
         }
 
         .project-card {
             text-decoration: none;
             color: inherit;
             display: block;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
         }
 
         .project-image {
             width: 100%;
-            aspect-ratio: 4/3;
-            background: #111;
-            border-radius: 24px;
+            aspect-ratio: 16/10;
+            background: #0a0a0a;
+            border-radius: 16px;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             position: relative;
+            border: 1px solid #111;
         }
 
         .project-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: var(--transition);
+            transition: var(--transition-premium);
             filter: grayscale(100%);
+            opacity: 0.8;
         }
 
         .project-card:hover .project-image img {
-            transform: scale(1.05);
+            transform: scale(1.03);
             filter: grayscale(0%);
+            opacity: 1;
         }
 
         .project-info h3 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
         .project-info p {
             color: var(--text-muted);
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-secondary);
+            font-size: 0.9rem;
         }
 
         /* --- CONTACT --- */
         .footer-cta {
-            text-align: center;
-            padding: 150px 0;
+            text-align: left;
+            padding: 120px 0;
+            border-top: 1px solid #1a1a1a;
         }
 
         .footer-cta h2 {
-            font-size: clamp(2rem, 6vw, 5rem);
-            margin-bottom: 60px;
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 50px;
+            max-width: 700px;
+            letter-spacing: -0.03em;
         }
 
         .contact-row {
             display: flex;
-            justify-content: center;
-            gap: 40px;
+            justify-content: flex-start;
+            gap: 30px;
+            flex-wrap: wrap;
         }
 
         .contact-link {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #fff;
             text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: var(--transition);
+            padding: 10px 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 30px;
+            transition: var(--transition-premium);
+            font-family: var(--font-secondary);
         }
 
         .contact-link:hover {
+            background: #fff;
+            color: #000;
             border-color: #fff;
-            opacity: 0.6;
         }
 
-        /* --- ANIMATIONS --- */
+        /* --- ANIMATIONS & REVEAL --- */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: var(--transition);
+            transform: translateY(30px);
+            transition: var(--transition-premium);
         }
 
         .reveal.active {
@@ -225,11 +285,13 @@
             transform: translateY(0);
         }
 
+        /* --- RESPONSIVE --- */
         @media (max-width: 900px) {
             .about-grid, .project-grid { grid-template-columns: 1fr; gap: 40px; }
-            .hero h1 { font-size: 4rem; }
+            .hero .subtitle { font-size: 2.2rem; }
             #cursor, #cursor-follower { display: none; }
             * { cursor: auto; }
+            .container { padding: 0 25px; }
         }
     </style>
 </head>
@@ -238,21 +300,27 @@
 
 <div id="cursor"></div>
 <div id="cursor-follower"></div>
+
+<div class="bg-spots">
+    <div class="spot spot-1"></div>
+    <div class="spot spot-2"></div>
+    <div class="spot spot-3"></div>
+</div>
 <div class="bg-glow"></div>
 
 <header class="hero container">
-    <h1 class="reveal active">Raphael<br>Filippo</h1>
-    <p class="subtitle reveal active">Desenvolvedor Full Stack & Estrategista Digital. Criando interfaces de alto impacto que unem tecnologia e conversão.</p>
+    <h1 class="reveal active"><strong>Raphael Filippo</strong><br><span>Digital Architect</span></h1>
+    <p class="subtitle reveal active">Arquitetando experiências digitais de alto impacto que unem tecnologia moderna e conversão estratégica.</p>
 </header>
 
 <section class="about container reveal">
     <div class="about-grid">
-        <div class="about-title">Profile.01</div>
+        <div class="about-title">Profile</div>
         <div class="about-content">
-            <p>Com trajetória na <strong>TOTVS</strong>, transformo ideias em soluções digitais. Formado em Tecnologia e Marketing, meu foco é criar produtos funcionais e <strong>estrategicamente desenhados para gerar resultados.</strong></p>
+            <p>Com trajetória na <strong>TOTVS</strong>, transformo ideias em soluções digitais. Formado em Tecnologia e Marketing, utilizo esse olhar duplo para criar produtos que não são apenas funcionais, mas também <strong>estrategicamente desenhados para gerar resultados.</strong></p>
             
             <div class="highlight-ia">
-                💡 Expert em Inteligência Artificial aplicada à criação de conteúdo e otimização de processos.
+                💡 Expert em Inteligência Artificial aplicada à otimização de processos e criação de conteúdo.
             </div>
         </div>
     </div>
@@ -262,11 +330,11 @@
     <div class="project-grid">
         <a href="https://sexcity.online/" target="_blank" class="project-card reveal">
             <div class="project-image">
-                <img src="sexcity-1.jpg" alt="Sex City">
+                <img src="sexcity-1.jpg" alt="Sex City Platform">
             </div>
             <div class="project-info">
                 <h3>Sex City</h3>
-                <p>Premium Digital Experience — Platform</p>
+                <p>Platform — Immersive Experience</p>
             </div>
         </a>
 
@@ -276,17 +344,17 @@
             </div>
             <div class="project-info">
                 <h3>Raphael & Co.</h3>
-                <p>Luxury Curation — Branding & Web</p>
+                <p>Web & Branding — Luxury Curation</p>
             </div>
         </a>
 
         <a href="https://place-angle-48031618.figma.site/" target="_blank" class="project-card reveal">
             <div class="project-image">
-                <img src="dg-1.jpg" alt="Landing Page">
+                <img src="dg-1.jpg" alt="Conversion Landing Page">
             </div>
             <div class="project-info">
                 <h3>Conversion Landing</h3>
-                <p>Strategic Marketing — Development</p>
+                <p>Strategic Development — CRO</p>
             </div>
         </a>
     </div>
@@ -295,54 +363,57 @@
 <section class="footer-cta container reveal">
     <h2>Vamos construir o próximo nível?</h2>
     <div class="contact-row">
-        <a href="https://wa.me/5511978732928" class="contact-link">WhatsApp</a>
-        <a href="https://instagram.com/filippo.raphael" class="contact-link">Instagram</a>
+        <a href="https://wa.me/5511978732928" target="_blank" class="contact-link">WhatsApp</a>
+        <a href="https://instagram.com/filippo.raphael" target="_blank" class="contact-link">Instagram</a>
         <a href="mailto:raphaelfilippo1@gmail.com" class="contact-link">E-mail</a>
     </div>
 </section>
 
-<footer class="container" style="padding: 40px 0; color: #444; font-size: 0.8rem; border-top: 1px solid #111;">
-    © 2026 Raphael Filippo. Digital Architect.
+<footer class="container" style="padding: 40px 0; color: #333; font-size: 0.8rem; border-top: 1px solid #111; font-family: var(--font-secondary);">
+    © 2026 Raphael Filippo. All Rights Reserved.
 </footer>
 
 <script>
-    // --- CURSOR LOGIC ---
+    // --- LÓGICA DO CURSOR E GLOW ---
     const cursor = document.querySelector('#cursor');
     const follower = document.querySelector('#cursor-follower');
-    const bgGlow = document.querySelector('.bg-glow');
 
     window.addEventListener('mousemove', (e) => {
         const x = e.clientX;
         const y = e.clientY;
         
+        // Move Cursor
         cursor.style.transform = `translate(${x}px, ${y}px)`;
-        follower.style.transform = `translate(${x - 15}px, ${y - 15}px)`;
+        // Move Follower com um leve delay (nativo do transition)
+        follower.style.transform = `translate(${x - 17.5}px, ${y - 17.5}px)`;
         
-        // Background Glow
+        // Move Background Glow (Efeito Radial)
         document.body.style.setProperty('--x', x + 'px');
         document.body.style.setProperty('--y', y + 'px');
     });
 
-    // Expand cursor on links
+    // Interação do Cursor com Links
     document.querySelectorAll('a').forEach(link => {
         link.addEventListener('mouseenter', () => {
-            follower.style.transform = `scale(2)`;
-            follower.style.background = `rgba(255,255,255,0.1)`;
+            follower.style.transform = `scale(1.8)`;
+            follower.style.background = `rgba(255,255,255,0.05)`;
+            follower.style.borderColor = `rgba(255,255,255,0.4)`;
         });
         link.addEventListener('mouseleave', () => {
             follower.style.transform = `scale(1)`;
             follower.style.background = `transparent`;
+            follower.style.borderColor = `rgba(255,255,255,0.2)`;
         });
     });
 
-    // --- REVEAL ON SCROLL ---
+    // --- REVEAL ON SCROLL (INTERSECTION OBSERVER) ---
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.1 }); // Dispara quando 10% do elemento aparece
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
