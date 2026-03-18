@@ -1,233 +1,375 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Raphael | Portfólio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raphael Filippo | Full Stack Developer</title>
 
-<style>
-body {
-  margin: 0;
-  font-family: -apple-system, sans-serif;
-  background: #0a0a0a;
-  color: white;
-}
+    <style>
+        /* CONFIGURAÇÕES GERAIS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* HERO */
-.hero {
-  text-align: center;
-  padding: 100px 20px;
-}
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-.hero h2 {
-  font-size: 48px;
-  background: linear-gradient(90deg, #fff, #777);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+        /* HERO COM EFEITO RADIAL */
+        .hero {
+            text-align: center;
+            padding: 160px 20px;
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
 
-.hero p {
-  color: #aaa;
-}
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.15), transparent);
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            filter: blur(100px);
+            z-index: -1;
+        }
 
-/* GRID */
-.projects {
-  padding: 40px;
-}
+        .hero h2 {
+            font-size: clamp(32px, 8vw, 64px);
+            background: linear-gradient(90deg, #fff, #777);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 25px;
-}
+        .hero p {
+            color: #aaa;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
 
-/* CARD */
-.card {
-  background: #111;
-  border-radius: 18px;
-  overflow: hidden;
-  transition: 0.4s;
-  border: 1px solid #222;
-}
+        /* SEÇÃO SOBRE */
+        .about {
+            padding: 100px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
 
-.card:hover {
-  transform: translateY(-10px);
-  border-color: #00ff88;
-}
+        .about h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #00ff88;
+        }
 
-/* CARROSSEL */
-.carousel {
-  position: relative;
-  height: 200px;
-  overflow: hidden;
-}
+        .about p {
+            color: #ccc;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
 
-.carousel img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  position: absolute;
-  opacity: 0;
-  transition: opacity 0.8s ease;
-}
+        .highlight-box {
+            background: #111;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #00ff88;
+            margin-top: 30px;
+            text-align: left;
+        }
 
-.carousel img.active {
-  opacity: 1;
-}
+        /* GRID DE PROJETOS */
+        .projects {
+            padding: 60px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-/* BOTÕES */
-.carousel button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.5);
-  border: none;
-  color: white;
-  padding: 8px 12px;
-  cursor: pointer;
-  border-radius: 6px;
-}
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2rem;
+        }
 
-.prev { left: 10px; }
-.next { right: 10px; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
 
-/* CONTEÚDO */
-.content {
-  padding: 20px;
-}
+        /* CARD COM ANIMAÇÃO REVEAL */
+        .card {
+            background: #111;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            border: 1px solid #222;
+        }
 
-.content h3 {
-  margin-bottom: 10px;
-}
+        .card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: #00ff88;
+            box-shadow: 0 20px 60px rgba(0, 255, 136, 0.1);
+        }
 
-.content p {
-  color: #aaa;
-  margin-bottom: 15px;
-}
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
 
-/* BOTÃO LINK */
-.content a {
-  display: inline-block;
-  background: #00ff88;
-  color: black;
-  padding: 10px 18px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: 0.3s;
-}
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-.content a:hover {
-  background: #00cc6a;
-}
+        /* CARROSSEL */
+        .carousel {
+            position: relative;
+            height: 240px;
+            overflow: hidden;
+        }
 
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 50px;
-  color: #666;
-}
-</style>
+        .carousel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .carousel img.active { opacity: 1; }
+
+        .carousel button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        /* CONTATO */
+        .contact {
+            padding: 100px 40px;
+            text-align: center;
+            background: #0f0f0f;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            text-decoration: none;
+            color: #888;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-item:hover {
+            color: #00ff88;
+            transform: translateY(-5px);
+        }
+
+        .contact-item svg {
+            width: 35px;
+            height: 35px;
+            fill: currentColor;
+        }
+
+        /* CONTEÚDO DO CARD */
+        .content { padding: 25px; }
+        .content h3 { margin-bottom: 10px; }
+        .content p { color: #888; margin-bottom: 20px; font-size: 0.9rem; }
+        .content a {
+            display: inline-block;
+            background: #00ff88;
+            color: black;
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #444;
+            border-top: 1px solid #111;
+        }
+
+        @media (max-width: 768px) {
+            .contact-links { gap: 20px; }
+        }
+    </style>
 </head>
 
 <body>
 
-<section class="hero">
-  <h2>Experiências Digitais que Vendem</h2>
-  <p>Design sofisticado, interfaces modernas e projetos de alto impacto</p>
+<header class="hero">
+    <div class="hero-content">
+        <h2>Experiências Digitais que Vendem</h2>
+        <p>Desenvolvedor Full Stack & Especialista em Branding Digital</p>
+    </div>
+</header>
+
+<section class="about reveal">
+    <h2>Sobre Mim</h2>
+    <p>🚀 <strong>Desenvolvedor Full Stack | Especialista em Sites, Landing Pages e Aplicativos</strong></p>
+    <p>Com uma trajetória que une tecnologia e negócios, ajudo empresas e empreendedores a transformarem suas ideias em soluções digitais de alto impacto. Formado em Tecnologia e também em Marketing, utilizo esse olhar duplo para criar produtos que não são apenas funcionais, mas também estrategicamente desenhados para converter e gerar resultados.</p>
+    <p>Minha experiência na <strong>TOTVS</strong> me proporcionou uma base sólida em desenvolvimento de software em larga escala e boas práticas do mercado corporativo. Hoje, aplico esse conhecimento para entregar projetos personalizados, desde a concepção até o deploy.</p>
+    
+    <div class="highlight-box">
+        <p>💡 <strong>Diferencial:</strong> Aliado ao meu conhecimento técnico, sou um entusiasta e expert na aplicação de Inteligência Artificial para criação de conteúdo, otimizando processos e gerando valor de forma inovadora para os projetos.</p>
+    </div>
 </section>
 
-<section class="projects">
-<div class="grid">
+<main class="projects">
+    <h2 class="section-title">Projetos em Destaque</h2>
+    <div class="grid">
+        <article class="card reveal">
+            <div class="carousel">
+                <img src="sexcity-1.jpg" class="active">
+                <img src="sexcity-2.jpg">
+                <button class="prev">‹</button>
+                <button class="next">›</button>
+            </div>
+            <div class="content">
+                <h3>Sex City</h3>
+                <p>Plataforma premium com experiência imersiva e design sofisticado.</p>
+                <a href="https://sexcity.online/" target="_blank">Ver projeto</a>
+            </div>
+        </article>
 
-<!-- SEX CITY -->
-<div class="card">
-  <div class="carousel">
-    <img src="sexcity-1.jpg" class="active">
-    <img src="sexcity-2.jpg">
-    <img src="sexcity-3.jpg">
-    <img src="sexcity-4.jpg">
-    <img src="sexcity-5.jpg">
-    <img src="sexcity-6.jpg">
-    <button class="prev">‹</button>
-    <button class="next">›</button>
-  </div>
-  <div class="content">
-    <h3>Sex City</h3>
-    <p>Plataforma premium com experiência imersiva e design sofisticado.</p>
-    <a href="https://sexcity.online/" target="_blank">Ver projeto</a>
-  </div>
-</div>
+        <article class="card reveal">
+            <div class="carousel">
+                <img src="raphaelco-1.jpg" class="active">
+                <img src="raphaelco-2.jpg">
+                <button class="prev">‹</button>
+                <button class="next">›</button>
+            </div>
+            <div class="content">
+                <h3>Raphael & Co.</h3>
+                <p>Curadoria digital com foco em produtos premium e segurança.</p>
+                <a href="https://raphaelcompany.com.br/" target="_blank">Ver projeto</a>
+            </div>
+        </article>
 
-<!-- RAPHAEL CO -->
-<div class="card">
-  <div class="carousel">
-    <img src="raphaelco-1.jpg" class="active">
-    <img src="raphaelco-2.jpg">
-    <img src="raphaelco-3.jpg">
-    <img src="raphaelco-4.jpg">
-    <img src="raphaelco-5.jpg">
-    <img src="raphaelco-6.jpg">
-    <button class="prev">‹</button>
-    <button class="next">›</button>
-  </div>
-  <div class="content">
-    <h3>Raphael & Co.</h3>
-    <p>Curadoria digital com foco em produtos premium e segurança.</p>
-    <a href="https://raphaelcompany.com.br/" target="_blank">Ver projeto</a>
-  </div>
-</div>
+        <article class="card reveal">
+            <div class="carousel">
+                <img src="dg-1.jpg" class="active">
+                <img src="dg-2.jpg">
+                <button class="prev">‹</button>
+                <button class="next">›</button>
+            </div>
+            <div class="content">
+                <h3>Landing Page</h3>
+                <p>Estrutura estratégica com foco total em conversão.</p>
+                <a href="https://place-angle-48031618.figma.site/" target="_blank">Ver projeto</a>
+            </div>
+        </article>
+    </div>
+</main>
 
-<!-- LANDING -->
-<div class="card">
-  <div class="carousel">
-    <img src="dg-1.jpg" class="active">
-    <img src="dg-2.jpg">
-    <img src="dg-3.jpg">
-    <img src="dg-4.jpg">
-    <button class="prev">‹</button>
-    <button class="next">›</button>
-  </div>
-  <div class="content">
-    <h3>Landing Page</h3>
-    <p>Landing page estratégica com foco em conversão.</p>
-    <a href="https://place-angle-48031618.figma.site/" target="_blank">Ver projeto</a>
-  </div>
-</div>
+<section class="contact reveal">
+    <h2>Vamos construir algo incrível juntos?</h2>
+    <div class="contact-links">
+        <a href="https://wa.me/5511978732928" target="_blank" class="contact-item">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.938 3.659 1.435 5.624 1.436h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span>WhatsApp</span>
+        </a>
 
-</div>
+        <a href="https://instagram.com/filippo.raphael" target="_blank" class="contact-item">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.805.249 2.227.412.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.013 3.584-.07 4.85c-.054 1.17-.249 1.805-.413 2.227-.217.562-.477.96-.896 1.382-.42.419-.819.679-1.381.896-.422.164-1.057.36-2.227.413-1.266.057-1.646.07-4.85.07s-3.584-.013-4.85-.07c-1.17-.054-1.805-.249-2.227-.412-.562-.217-.96-.477-1.382-.896-.419-.42-.679-.819-.896-1.381-.164-.422-.36-1.057-.413-2.227-.057-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.054-1.17.249-1.805.412-2.227.217-.562.477-.96.896-1.382.42-.419.819-.679 1.381-.896.422-.164 1.057-.36 2.227-.413 1.266-.057 1.646-.07 4.85-.07M12 0C8.741 0 8.333.014 7.053.072 5.775.132 4.905.332 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.332 4.905.132 5.775.072 7.053.014 8.333 0 8.741 0 12s.014 3.667.072 4.947c.06 1.277.26 2.148.558 2.913.306.788.717 1.459 1.384 2.126s1.337 1.077 2.126 1.384c.766.299 1.636.499 2.913.558C8.333 23.986 8.741 24 12 24s3.667-.014 4.947-.072c1.277-.06 2.148-.26 2.913-.558.788-.306 1.459-.717 2.126-1.384s1.077-1.337 1.384-2.126c.299-.766.499-1.636.558-2.913.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.06-1.277-.26-2.148-.558-2.913-.306-.788-.717-1.459-1.384-2.126S18.65 1.031 17.86.726c-.766-.299-1.636-.499-2.913-.558C15.667.014 15.259 0 12 0z"/><path d="M12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zM18.406 4.406a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z"/></svg>
+            <span>Instagram</span>
+        </a>
+
+        <a href="mailto:raphaelfilippo1@gmail.com" class="contact-item">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <span>E-mail</span>
+        </a>
+    </div>
 </section>
 
 <footer>
-© 2026 Raphael Filippo
+    © 2026 Raphael Filippo | Tecnologia & Marketing
 </footer>
 
 <script>
-document.querySelectorAll('.carousel').forEach(carousel => {
-  const images = carousel.querySelectorAll('img');
-  let index = 0;
+    // CARROSSEL LOGIC
+    document.querySelectorAll('.carousel').forEach(carousel => {
+        const images = carousel.querySelectorAll('img');
+        let index = 0;
+        const showImage = (i) => {
+            images.forEach(img => img.classList.remove('active'));
+            images[i].classList.add('active');
+        };
+        carousel.querySelector('.next').onclick = () => {
+            index = (index + 1) % images.length;
+            showImage(index);
+        };
+        carousel.querySelector('.prev').onclick = () => {
+            index = (index - 1 + images.length) % images.length;
+            showImage(index);
+        };
+        setInterval(() => {
+            index = (index + 1) % images.length;
+            showImage(index);
+        }, 4000);
+    });
 
-  const showImage = (i) => {
-    images.forEach(img => img.classList.remove('active'));
-    images[i].classList.add('active');
-  };
+    // SCROLL REVEAL & PARALLAX
+    const reveals = document.querySelectorAll('.reveal');
+    const heroContent = document.querySelector('.hero-content');
 
-  carousel.querySelector('.next').onclick = () => {
-    index = (index + 1) % images.length;
-    showImage(index);
-  };
+    const handleScroll = () => {
+        const scrollY = window.scrollY;
+        
+        // Parallax Hero
+        if (heroContent) {
+            heroContent.style.transform = `translateY(${scrollY * 0.3}px)`;
+            heroContent.style.opacity = 1 - (scrollY / 600);
+        }
 
-  carousel.querySelector('.prev').onclick = () => {
-    index = (index - 1 + images.length) % images.length;
-    showImage(index);
-  };
+        // Reveal no scroll
+        reveals.forEach(el => {
+            const top = el.getBoundingClientRect().top;
+            if (top < window.innerHeight - 100) {
+                el.classList.add('active');
+            }
+        });
+    };
 
-  // autoplay
-  setInterval(() => {
-    index = (index + 1) % images.length;
-    showImage(index);
-  }, 3000);
-});
+    window.addEventListener('scroll', handleScroll);
+    window.onload = handleScroll;
 </script>
 
 </body>
