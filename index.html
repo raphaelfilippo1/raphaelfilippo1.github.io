@@ -35,13 +35,10 @@
 
         a, button { cursor: pointer; }
 
-        /* --- BACKGROUND ANIMADO --- */
-       /* --- FUNDO ANIMADO (AJUSTADO PARA MOBILE) --- */
         .bg-spots {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            /* Removemos o blur do container pai para evitar bugs no Safari */
             overflow: hidden;
             background-color: #000; 
         }
@@ -50,13 +47,11 @@
             position: absolute;
             border-radius: 50%;
             background: var(--blue-spot);
-            /* O segredo: desfoque direto na mancha e um tamanho mínimo maior em pixels */
             filter: blur(60px); 
             animation: moveSpots 25s infinite alternate ease-in-out;
-            will-change: transform; /* Melhora a performance no celular */
+            will-change: transform;
         }
 
-        /* No mobile, vw (viewport width) é pequeno, então aumentamos a proporção */
         .spot-1 { 
             width: 80vw; 
             height: 80vw; 
@@ -76,7 +71,7 @@
 
         @media (max-width: 768px) {
             .spot {
-                filter: blur(40px); /* Blur menor no mobile para não sumir com a cor */
+                filter: blur(40px);
                 opacity: 0.8;
             }
         }
@@ -92,7 +87,6 @@
             padding: 0 40px;
         }
 
-        /* --- HERO --- */
         .hero {
             height: 100vh;
             display: flex;
@@ -115,14 +109,13 @@
             letter-spacing: -0.04em;
         }
 
-        /* --- ABOUT --- */
         .about { padding: 100px 0; }
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 80px;
             border-top: 1px solid #1a1a1a;
-            padding-top: 60:px;
+            padding-top: 60px;
         }
         .about-title {
             font-size: 0.75rem;
@@ -131,12 +124,13 @@
             color: var(--text-muted);
         }
         .about-content {
-            font-size: clamp(1.1rem, 2vw, 1.5rem);
-            line-height: 1.5;
+            font-size: clamp(1rem, 1.8vw, 1.3rem);
+            line-height: 1.6;
             color: #ccc;
         }
+        .about-content p { margin-bottom: 20px; }
+        .about-content strong { color: #fff; font-weight: 600; }
 
-        /* --- PROJECTS GRID --- */
         .projects { 
             padding-top: 150px; 
             padding-bottom: 100px;
@@ -179,7 +173,6 @@
             transform: scale(1.02);
         }
 
-        /* --- CONTACT SECT --- */
         .footer-cta {
             padding: 120px 0;
             border-top: 1px solid #1a1a1a;
@@ -210,7 +203,6 @@
         .contact-link:hover { opacity: 0.6; }
         .contact-link svg { width: 24px; height: 24px; fill: currentColor; }
 
-        /* --- REVEAL --- */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -244,7 +236,8 @@
     <div class="about-grid">
         <div class="about-title">Profile.2026</div>
         <div class="about-content">
-            <p>Especialista em transformar visão de negócio em interfaces de alta performance. Com foco em <strong>luxo e conversão</strong>, desenvolvo ecossistemas digitais que elevam o posicionamento de marca.</p>
+            <p>Com uma trajetória que une <strong>tecnologia e negócios</strong>, ajudo empresas e empreendedores a transformarem suas ideias em soluções digitais de alto impacto. Formado em Tecnologia e também em Marketing, utilizo esse olhar duplo para criar produtos que não são apenas funcionais, mas também estrategicamente desenhados para <strong>converter e gerar resultados</strong>.</p>
+            <p>Minha experiência na <strong>TOTVS</strong> me proporcionou uma base sólida em desenvolvimento de software em larga escala e boas práticas do mercado corporativo. Hoje, aplico esse conhecimento para entregar projetos personalizados, desde a concepção até o deploy.</p>
         </div>
     </div>
 </section>
@@ -271,7 +264,7 @@
 
         <a href="https://memo-caper-24151310.figma.site/" target="_blank" class="project-card reveal">
             <div class="project-image">
-                <img src="kp-1.jpg" alt="Karine Pires Nails">
+                <img src="kp-1.jpg" alt="Kenia Portugal">
             </div>
             <h3>Kenia Portugal</h3>
             <p style="color:var(--text-muted); font-size:0.9rem;">Nails Designer | Expert em Fibra de vidro | Blindagem | Banho de Gel </p>
