@@ -69,13 +69,6 @@
             background: rgba(0, 100, 255, 0.1); 
         }
 
-        @media (max-width: 768px) {
-            .spot {
-                filter: blur(40px);
-                opacity: 0.8;
-            }
-        }
-
         @keyframes moveSpots {
             0% { transform: translate(0, 0) scale(1); }
             100% { transform: translate(10%, 10%) scale(1.2); }
@@ -103,9 +96,9 @@
         }
 
         .hero .subtitle {
-            font-size: clamp(2rem, 6vw, 4rem);
+            font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 800;
-            line-height: 1.05;
+            line-height: 1.1;
             letter-spacing: -0.04em;
         }
 
@@ -131,16 +124,12 @@
         .about-content p { margin-bottom: 20px; }
         .about-content strong { color: #fff; font-weight: 600; }
 
-        .projects { 
-            padding-top: 150px; 
-            padding-bottom: 100px;
-        }
-
         .project-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 50px;
             margin-top: 40px;
+            padding-bottom: 100px;
         }
 
         .project-card {
@@ -215,7 +204,6 @@
 
         @media (max-width: 900px) {
             .about-grid, .project-grid { grid-template-columns: 1fr; }
-            .contact-row { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
@@ -229,7 +217,7 @@
 
 <header class="hero container">
     <h1 class="reveal active">Raphael Filippo — <span>Digital Architect</span></h1>
-    <p class="subtitle reveal active">Arquitetando experiências digitais que unem tecnologia moderna e conversão estratégica.</p>
+    <p class="subtitle reveal active">Desenvolvedor Full Stack | Especialista em Sites, Landing Pages e Aplicativos<br>Expert na aplicação de Inteligência Artificial</p>
 </header>
 
 <section class="about container reveal">
